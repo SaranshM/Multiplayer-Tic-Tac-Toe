@@ -32,12 +32,12 @@ vs_computer.addEventListener("click", async (e) => {
     const req_data = {
         player2_type: "computer"
     }
-    const { data } = await axios.post("http://localhost:3000/start_game_vs_computer", req_data)
+    const { data } = await axios.post("https://letsendorse-assn.herokuapp.com/start_game_vs_computer", req_data)
     if(data.error) {
         alert("Error has ocurred")
         return
     }
-    window.location.href = `file:///D:/letsendorse_assn/public/html/vs_computer.html?match_id=${data.data.game_id}`;
+    window.location.href = `https://saranshm.github.io/letsendorse_assn/public/html/vs_computer.html?match_id=${data.data.game_id}`;
 })
 
 // When user wants to play against another player.
@@ -52,7 +52,7 @@ vs_player.addEventListener("click", async (e) => {
         choice,
         other_choice
     }
-    const { data } = await axios.post("http://localhost:3000/start_game_vs_player", req_data)
+    const { data } = await axios.post("https://letsendorse-assn.herokuapp.com/start_game_vs_player", req_data)
     localStorage[data.data.game_id] = true
     localStorage[`${data.data.game_id}_turn`] = "yes"
     localStorage[`${data.data.game_id}_status`] = "ongoing"
@@ -70,7 +70,7 @@ vs_player.addEventListener("click", async (e) => {
     localStorage[`${data.data.game_id}_box9_status`] = "none"
     localStorage[`${data.data.game_id}_choice`] = choice
     link.style.display = "block"
-    const game_link = `file:///D:/letsendorse_assn/public/html/vs_player.html?game_id=${data.data.game_id}`
+    const game_link = `https://saranshm.github.io/letsendorse_assn/public/html/vs_player.html?game_id=${data.data.game_id}`
     link.href = game_link
     document.getElementById("unique_game_id").innerHTML = "Share Game ID : " + data.data.game_id
 })
@@ -86,10 +86,10 @@ join_match_form.addEventListener("submit", async (e) => {
     const req_body = {
         game_id
     }
-    const { data } = await axios.post("http://localhost:3000/check_game", req_body)
+    const { data } = await axios.post("https://letsendorse-assn.herokuapp.com/check_game", req_body)
     if(data.error) {
         alert("Invalid Game ID.")
         return
     }
-    window.location.href = `file:///D:/letsendorse_assn/public/html/vs_player.html?game_id=${game_id}`;
+    window.location.href = `https://saranshm.github.io/letsendorse_assn/public/html/vs_player.html?game_id=${game_id}`;
 })

@@ -101,7 +101,7 @@ async function display_move_vs_computer(player_type,num) {
         document.getElementsByClassName("error")[0].style.backgroundColor = "#4e8d7c"
         document.getElementsByClassName("error")[0].style.borderColor = "#045762"
         document.getElementsByClassName("error_text")[0].style.color = "#f3f2da"
-        await axios.post("http://localhost:3000/update_score", req_data)
+        await axios.post("https://letsendorse-assn.herokuapp.com/update_score", req_data)
         return
     }
 }
@@ -120,8 +120,6 @@ async function show_winner(player_type) {
 function close_notification(elem) {
     const overlay = document.getElementsByClassName("error_wrap")[0]
     overlay.style.display = "none"
-    // window.location.href = `file:///D:/letsendorse_assn/public/html/index.html`;
-
 }
 
 // Execute a move by player/computer

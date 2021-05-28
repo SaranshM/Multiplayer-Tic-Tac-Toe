@@ -1,5 +1,5 @@
 // Connecting client to the server socket.
-const socket = io.connect("http://localhost:3000/");
+const socket = io.connect("https://letsendorse-assn.herokuapp.com/");
 
 // Fetching query params
 const user_data = Qs.parse(location.search,{ ignoreQueryPrefix:true });
@@ -226,7 +226,7 @@ socket.on("display_move", async (user_datax) => {
         document.getElementsByClassName("error")[0].style.borderColor = "#045762"
         document.getElementsByClassName("error_text")[0].style.color = "#f3f2da"
         if(localStorage[`${user_data.game_id}_host`] == "yes") {
-            await axios.post("http://localhost:3000/update_score_player", req_data)
+            await axios.post("https://letsendorse-assn.herokuapp.com/update_score_player", req_data)
         }
         return
     }
@@ -739,7 +739,7 @@ async function update_game_scores(obj) {
         host,
         player
     }
-    await axios.post("http://localhost:3000/update_score_player", req_data)
+    await axios.post("https://letsendorse-assn.herokuapp.com/update_score_player", req_data)
 }
 
 // When game is over
@@ -774,7 +774,7 @@ function close_error_modal(elem) {
 function close_notification_player(elem) {
     const overlay = document.getElementsByClassName("error_wrap")[0]
     overlay.style.display = "none"
-        window.location.href = `file:///D:/letsendorse_assn/public/html/index.html`;
+        window.location.href = `https://saranshm.github.io/letsendorse_assn/public/html/index.html`;
 
 }
 
