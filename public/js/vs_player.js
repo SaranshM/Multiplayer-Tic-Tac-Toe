@@ -1,5 +1,17 @@
+// Checking Environment
+const currUrl = window.location.href
+let baseBackend, baseFrontend
+if(currUrl.slice(0,5) == "https") {
+    baseBackend = "https://letsendorse-assn.herokuapp.com"
+    baseFrontend = "https://saranshm.github.io/letsendorse_assn/public/html"
+}
+else {
+    baseBackend = "http://localhost:3000"
+    baseFrontend = "file:///D:/letsendorse_assn/public/html"
+}
+
 // Connecting client to the server socket.
-const socket = io.connect("https://letsendorse-assn.herokuapp.com/");
+const socket = io.connect(`${baseBackend}/`);
 
 // Fetching query params
 const user_data = Qs.parse(location.search,{ ignoreQueryPrefix:true });
@@ -25,6 +37,7 @@ let num_users
 socket.on("welcome",(data)=>{
     num_users = data.num_users
     if(data.num_users == 1 && data.game.host == localStorage[`${user_data.game_id}_username`]) {
+        console.log("1")
         player1_name.innerHTML = data.game.host
         player1_wins.innerHTML = data.game.player1_wins
         player1_losses.innerHTML = data.game.player1_losses
@@ -32,6 +45,7 @@ socket.on("welcome",(data)=>{
         board.style.cursor = "no-drop"
     }
     else if(data.num_users == 1 && data.game.host != localStorage[`${user_data.game_id}_username`]) {
+        console.log("2")
         localStorage[user_data.game_id] = true
         localStorage[`${user_data.game_id}_username`] = data.game.player
         localStorage[`${user_data.game_id}_choice`] = data.game.player_move
@@ -55,6 +69,7 @@ socket.on("welcome",(data)=>{
         board.style.cursor = "no-drop"
     }
     else if(data.num_users == 1 && data.game.player == localStorage[`${user_data.game_id}_username`]) {
+        console.log("3")
         player2_name.innerHTML = data.game.player
         player2_wins.innerHTML = data.game.player2_wins
         player2_losses.innerHTML = data.game.player2_losses
@@ -62,6 +77,7 @@ socket.on("welcome",(data)=>{
         board.style.cursor = "no-drop"
     }
     else if(data.num_users == 2) {
+        console.log("4")
         board.style.cursor = "context-menu"
         player2_name.innerHTML = data.game.player
         player2_wins.innerHTML = data.game.player2_wins
@@ -109,8 +125,10 @@ socket.on("welcome",(data)=>{
                 document.getElementsByClassName("player")[0].style.border = "dashed 3px #3bc14a"
             }
         }
+
     }
     if(localStorage[user_data.game_id]) {
+        console.log("5")
         const boxes = document.getElementsByClassName("col")
         for(let i = 0; i < 9; i++) {
             const action = localStorage[`${user_data.game_id}_box${i+1}_status`]
@@ -226,7 +244,7 @@ socket.on("display_move", async (user_datax) => {
         document.getElementsByClassName("error")[0].style.borderColor = "#045762"
         document.getElementsByClassName("error_text")[0].style.color = "#f3f2da"
         if(localStorage[`${user_data.game_id}_host`] == "yes") {
-            await axios.post("https://letsendorse-assn.herokuapp.com/update_score_player", req_data)
+            await axios.post(`${baseBackend}/update_score_player`, req_data)
         }
         return
     }
@@ -739,7 +757,7 @@ async function update_game_scores(obj) {
         host,
         player
     }
-    await axios.post("https://letsendorse-assn.herokuapp.com/update_score_player", req_data)
+    await axios.post(`${baseBackend}/update_score_player`, req_data)
 }
 
 // When game is over
@@ -774,9 +792,66 @@ function close_error_modal(elem) {
 function close_notification_player(elem) {
     const overlay = document.getElementsByClassName("error_wrap")[0]
     overlay.style.display = "none"
-        window.location.href = `https://saranshm.github.io/letsendorse_assn/public/html/index.html`;
-
+        window.location.href = `${baseFrontend}/index.html`;
 }
+
+// Restart game
+function restart_game() {
+    socket.emit("restart", { game_id: user_data.game_id })
+}
+
+socket.on("restart_game", async (data) => {
+    document.getElementsByClassName("error_wrap")[0].style.display = "none"
+    board.style.cursor = "context-menu"
+    player2_name.innerHTML = data.game.player
+    player2_wins.innerHTML = data.game.player2_wins
+    player2_losses.innerHTML = data.game.player2_losses
+    player2_draws.innerHTML = data.game.player2_draws
+    player1_name.innerHTML = data.game.host
+    player1_wins.innerHTML = data.game.player1_wins
+    player1_losses.innerHTML = data.game.player1_losses
+    player1_draws.innerHTML = data.game.player1_draws
+
+    if(localStorage[`${user_data.game_id}_host`] == "no") {
+        localStorage[user_data.game_id] = true
+        localStorage[`${user_data.game_id}_username`] = data.game.player
+        localStorage[`${user_data.game_id}_choice`] = data.game.player_move
+        localStorage[`${user_data.game_id}_turn`] = "no"
+        localStorage[`${user_data.game_id}_host`] = "no"
+        localStorage[`${user_data.game_id}_boxes_filled`] = 0
+        localStorage[`${user_data.game_id}_status`] = "ongoing"
+        localStorage[`${user_data.game_id}_box1_status`] = "none"
+        localStorage[`${user_data.game_id}_box2_status`] = "none"
+        localStorage[`${user_data.game_id}_box3_status`] = "none"
+        localStorage[`${user_data.game_id}_box4_status`] = "none"
+        localStorage[`${user_data.game_id}_box5_status`] = "none"
+        localStorage[`${user_data.game_id}_box6_status`] = "none"
+        localStorage[`${user_data.game_id}_box7_status`] = "none"
+        localStorage[`${user_data.game_id}_box8_status`] = "none"
+        localStorage[`${user_data.game_id}_box9_status`] = "none"
+        document.getElementsByClassName("player")[1].style.border = "dashed 3px #A50104"
+    }
+    else if(localStorage[`${user_data.game_id}_host`] == "yes") {
+        localStorage[user_data.game_id] = true
+        localStorage[`${user_data.game_id}_turn`] = "yes"
+        localStorage[`${user_data.game_id}_status`] = "ongoing"
+        localStorage[`${user_data.game_id}_boxes_filled`] = 0
+        localStorage[`${user_data.game_id}_username`] = data.game.host
+        localStorage[`${user_data.game_id}_host`] = "yes"
+        localStorage[`${user_data.game_id}_box1_status`] = "none"
+        localStorage[`${user_data.game_id}_box2_status`] = "none"
+        localStorage[`${user_data.game_id}_box3_status`] = "none"
+        localStorage[`${user_data.game_id}_box4_status`] = "none"
+        localStorage[`${user_data.game_id}_box5_status`] = "none"
+        localStorage[`${user_data.game_id}_box6_status`] = "none"
+        localStorage[`${user_data.game_id}_box7_status`] = "none"
+        localStorage[`${user_data.game_id}_box8_status`] = "none"
+        localStorage[`${user_data.game_id}_box9_status`] = "none"
+        localStorage[`${user_data.game_id}_choice`] = data.game.host_move
+        document.getElementsByClassName("player")[0].style.border = "dashed 3px #3bc14a"
+    }
+    window.location.reload();
+})
 
 // Emit join of a user
 socket.emit("join",{ 

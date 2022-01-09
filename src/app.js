@@ -4,7 +4,6 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors")
 const bodyParser = require("body-parser");
-const GamesComputer = require("../models/games_computer")
 const GamesPlayer = require("../models/games_player")
 
 let global_memo = {}
@@ -33,25 +32,6 @@ function generate_id(length) {
    }
    return result.join('');
 }
-
-// Start a game vs computer and store in db
-app.post('/start_game_vs_computer', post, async (req,res) => {
-    try {
-        console.log("Request object ==> ",req.body)
-        const { player2_type } = req.body
-        const _id = generate_id(parseInt(process.env.MATCH_ID_LENGTH))
-        const new_game = new GamesComputer({
-            _id,
-            player2_type
-        })
-        await new_game.save()
-        return res.send({ error: false, data: { game_id: _id } })
-    }
-    catch(err) {
-        console.log(err)
-        return res.send({ error: true, data: { err } })
-    }
-})
 
 // Checking if a game exists or not.
 app.post('/check_game', post, async (req,res) => {
@@ -117,24 +97,6 @@ app.post("/update_score_player", async (req,res) => {
     }
 })
 
-// Update a score in a game vs player.
-app.post("/update_score", async (req,res) => {
-    try {
-        const { _id, result } = req.body
-        const game = await GamesComputer.findOne({ _id: _id })
-        if(result == "draw") {
-            game.player1_draws = parseInt(game.player1_draws) + 1
-            game.player2_draws = parseInt(game.player2_draws) + 1
-        }
-        await game.save()
-        return res.send({ error: false })
-    }
-    catch(err) {
-        console.log(err)
-        return res.send({ error: true, data: { err } })
-    }
-})
-
 // Socket functions (listeners and emitters)
 io.on('connection', async (socket)=>{
     console.log("New connection");
@@ -161,6 +123,13 @@ io.on('connection', async (socket)=>{
     // When the game is over.
     socket.on("game_over", async (user_data) => {
         io.to(user_data.game_id).emit("end_game", user_data);
+    })
+
+    // When the game is restarted.
+    socket.on("restart", async (user_data) => {
+        console.log("restart")
+        const game = await GamesPlayer.findById(user_data.game_id)
+        io.to(user_data.game_id).emit("restart_game", { game });
     })
 })
 

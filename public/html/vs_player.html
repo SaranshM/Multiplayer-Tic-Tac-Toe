@@ -6,10 +6,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="header">
-            <img src="../images/header_icon.png">
-            <h1>Tic-Tac-Toe</h1>
-        </div>
+        <a href="./index.html" style = "text-decoration: none;">
+            <div class="header">
+                <img src="../images/header_icon.png">
+                <h1>Tic-Tac-Toe</h1>
+            </div>
+        </a>
         <div class="players">
             <table class="player">
                 <tr class="score_elem_wrap">
@@ -79,12 +81,13 @@
             <div class="error">
                 <img src="https://img.icons8.com/ios-glyphs/30/000000/macos-close.png" class="close" onclick="close_notification_player(this)"/>
                 <p class="error_text"></p>
+                <button class="submit" onclick = "restart_game()">Restart</button>
             </div>
         </div>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
-    <script src="https://letsendorse-assn.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </html>
 <script src="../js/vs_player.js"></script>

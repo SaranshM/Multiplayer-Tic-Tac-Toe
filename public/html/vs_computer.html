@@ -5,12 +5,55 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <div class="header">
-            <img src="../images/header_icon.png">
-            <h1>Tic-Tac-Toe</h1>
+    <body onload="initialConfig()">
+        <a href="./index.html" style = "text-decoration: none;">
+            <div class="header">
+                <img src="../images/header_icon.png">
+                <h1>Tic-Tac-Toe</h1>
+            </div>
+        </a>
+        <div class = "sub_header">
+            <img src = "../images/back.png" class = "back">
+            <h1 class="heading">YOU'RE PLAYING AGAINST A COMPUTER.</h1>
         </div>
-        <h1 class="heading">YOU'RE PLAYING AGAINST A COMPUTER.</h1>
+        <div class="players">
+            <table class="player">
+                <tr class="score_elem_wrap">
+                    <td class="player_type">Host :</td>
+                    <td id="player1_name">You</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_wins">Wins :</td>
+                    <td id="player1_wins">0</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_lost">Lost :</td>
+                    <td id="player1_losses">0</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_draws">Draws :</td>
+                    <td id="player1_draws">0</td>
+                </tr>
+            </table>
+            <table class="player">
+                <tr class="score_elem_wrap">
+                    <td class="player_type">Player 2 :</td>
+                    <td id="player2_name">Computer</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_wins">Wins :</td>
+                    <td id="player2_wins">0</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_lost">Lost :</td>
+                    <td id="player2_losses">0</td>
+                </tr>
+                <tr class="score_elem_wrap">
+                    <td class="player_draws">Draws :</td>
+                    <td id="player2_draws">0</td>
+                </tr>
+            </table>
+        </div>
         <div class="board">
             <div class="row">
                 <div class="col" onmouseover="show_option_vs_computer(this,1)" onmouseout="remove_option_vs_computer(this,1)" onclick="execute_option_vs_computer(this,1,'player')">

@@ -6,19 +6,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="header">
-            <img src="../images/header_icon.png">
-            <h1>Tic-Tac-Toe</h1>
+        <a href="./index.html" style = "text-decoration: none;">
+            <div class="header">
+                <img src="../images/header_icon.png">
+                <h1>Tic-Tac-Toe</h1>
+            </div>
+        </a>
+        <div class = "sub_header">
+            <img src = "../images/back.png" class = "back">
+            <h1 class="heading">Play a Tic-Tac-Toe game!</h1>
         </div>
-        <h1 class="heading">Start or Join a Tic-Tac-Toe game!</h1>
-        <form class="create_form">
-            <button class = "submit" id="start_match">Start New Match</button>
-            <button class = "submit" id="join_match">Join Match</button>
-        </form>
-        <form class="join_match_form">
-            <input type="text" name="match_id" id="match_id" placeholder="5 character Match ID" autocomplete="off">
-            <button class = "submit" id="submit_join_match" type="submit">Submit</button>
-        </form>
         <form class="start_match_form">
             <button class = "submit" id="vs_computer">Vs. Computer</button>
             <button class = "submit" id="vs_player">Vs. Player</button>
