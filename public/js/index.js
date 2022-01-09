@@ -12,7 +12,7 @@ if(currUrl.slice(0,5) == "https") {
     baseFrontend = "https://saranshm.github.io/letsendorse_assn/public/html"
 }
 else {
-    baseBackend = "http://localhost:3000"
+    baseBackend = "https://letsendorse-assn.herokuapp.com"
     baseFrontend = "file:///D:/letsendorse_assn/public/html"
 }
 
