@@ -10,7 +10,7 @@ if(currUrl.slice(0,5) == "https") {
 }
 else {
     baseBackend = "http://localhost:3000"
-    baseFrontend = "file:///D:/letsendorse_assn/public/html"
+    baseFrontend = "file:///D:/letsendorse/public/html"
 }
 
 function initialConfig() {
@@ -100,7 +100,10 @@ function sleep(ms) {
 }
 
 // Display move by player/computer
-async function display_move_vs_computer(player_type,num) {
+async function display_move_vs_computer(player_type,num,status) {
+    if(status == "over") {
+        return
+    }
     localStorage[`${match_data.match_id}_boxes_filled`]++
     const action = player_type == "player" ? "cross" : "circle"
     if(localStorage[`${match_data.match_id}_status`] == "ongoing" && localStorage[`${match_data.match_id}_boxes_filled`] < 9) {
@@ -218,21 +221,21 @@ async function execute_option_vs_computer(elem,num,player_type) {
     const action = player_type == "player" ? "cross" : "circle"
     if(num == 1) {
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box2_status`] == action && localStorage[`${match_data.match_id}_box3_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box4_status`] == action && localStorage[`${match_data.match_id}_box7_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -241,14 +244,14 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 2) {
         if(localStorage[`${match_data.match_id}_box1_status`] == action && localStorage[`${match_data.match_id}_box3_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box8_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -257,21 +260,21 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 3) {
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box7_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box2_status`] == action && localStorage[`${match_data.match_id}_box1_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box6_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -280,14 +283,14 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 4) {
         if(localStorage[`${match_data.match_id}_box1_status`] == action && localStorage[`${match_data.match_id}_box7_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box6_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -296,28 +299,28 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 5) {
         if(localStorage[`${match_data.match_id}_box2_status`] == action && localStorage[`${match_data.match_id}_box8_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box4_status`] == action && localStorage[`${match_data.match_id}_box6_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box3_status`] == action && localStorage[`${match_data.match_id}_box7_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box1_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -326,14 +329,14 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 6) {
         if(localStorage[`${match_data.match_id}_box3_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box4_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -342,21 +345,21 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 7) {
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box3_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box4_status`] == action && localStorage[`${match_data.match_id}_box1_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box8_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -365,14 +368,14 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 8) {
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box2_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box7_status`] == action && localStorage[`${match_data.match_id}_box9_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
@@ -381,28 +384,28 @@ async function execute_option_vs_computer(elem,num,player_type) {
     }
     if(num == 9) {
         if(localStorage[`${match_data.match_id}_box5_status`] == action && localStorage[`${match_data.match_id}_box1_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box8_status`] == action && localStorage[`${match_data.match_id}_box7_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
         if(localStorage[`${match_data.match_id}_box6_status`] == action && localStorage[`${match_data.match_id}_box3_status`] == action) {
-            display_move_vs_computer(player_type,num)
+            display_move_vs_computer(player_type,num,"over")
             await sleep(1000)
             localStorage[`${match_data.match_id}_status`] = "over"
             show_winner(player_type)
             return
         }
     }
-    display_move_vs_computer(player_type,num)
+    display_move_vs_computer(player_type,num,"ongoing")
 }
 
 // Create a new game.

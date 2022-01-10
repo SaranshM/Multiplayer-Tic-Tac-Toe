@@ -7,7 +7,7 @@ if(currUrl.slice(0,5) == "https") {
 }
 else {
     baseBackend = "http://localhost:3000"
-    baseFrontend = "file:///D:/letsendorse_assn/public/html"
+    baseFrontend = "file:///D:/letsendorse/public/html"
 }
 
 // Connecting client to the server socket.
@@ -188,6 +188,9 @@ function remove_option(elem,num) {
 
 // Display move by player1/player2
 socket.on("display_move", async (user_datax) => {
+    if(user_datax.game_status == "over") {
+        localStorage[`${user_data.game_id}_status`] = "over"
+    }
     localStorage[`${user_data.game_id}_boxes_filled`]++
     if(num_users == 2 && localStorage[`${user_data.game_id}_status`] == "ongoing") {
         if(user_datax.action == "cross") {
@@ -227,7 +230,8 @@ socket.on("display_move", async (user_datax) => {
             document.getElementsByClassName("player")[0].style.border = "dashed 3px #A50104"
         }
     }
-    if(localStorage[`${user_data.game_id}_boxes_filled`] == 9) {
+    if(localStorage[`${user_data.game_id}_boxes_filled`] == 9 && localStorage[`${user_data.game_id}_status`] == "ongoing") {
+        console.log("draw" + localStorage[`${user_data.game_id}_status`])
         num_users = 0
         localStorage[`${user_data.game_id}_status`] = "over"
         const overlay = document.getElementsByClassName("error_wrap")[0]
@@ -276,7 +280,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -294,7 +299,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -312,7 +318,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -333,7 +340,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -352,7 +360,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -373,7 +382,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -392,7 +402,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -411,7 +422,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -432,7 +444,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -451,7 +464,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -472,7 +486,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -491,7 +506,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -510,7 +526,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -529,7 +546,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -549,7 +567,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -568,7 +587,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -589,7 +609,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -608,7 +629,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -627,7 +649,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -648,7 +671,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -667,7 +691,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -688,7 +713,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -707,7 +733,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -726,7 +753,8 @@ async function execute_option(elem,num) {
                 game_id: user_data.game_id,
                 action,
                 num,
-                user: localStorage[`${user_data.game_id}_turn`]
+                user: localStorage[`${user_data.game_id}_turn`],
+                game_status: "over"
             });
             socket.emit("game_over",{
                 user: localStorage[`${user_data.game_id}_username`],
@@ -744,7 +772,8 @@ async function execute_option(elem,num) {
         game_id: user_data.game_id,
         action,
         num,
-        user: localStorage[`${user_data.game_id}_turn`]
+        user: localStorage[`${user_data.game_id}_turn`],
+        game_status: "ongoing"
     });
 }
 
@@ -776,6 +805,7 @@ socket.on("end_game",async (data) => {
         player1_losses.innerHTML = parseInt(player1_wins.innerHTML) + 1
         player2_wins.innerHTML = parseInt(player2_losses.innerHTML) + 1
     }
+    
     document.getElementsByClassName("error_text")[0].innerHTML = `${data.user} won!`
     document.getElementsByClassName("error")[0].style.backgroundColor = "#4e8d7c"
     document.getElementsByClassName("error")[0].style.borderColor = "#045762"

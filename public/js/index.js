@@ -13,7 +13,7 @@ if(currUrl.slice(0,5) == "https") {
 }
 else {
     baseBackend = "http://localhost:3000"
-    baseFrontend = "file:///D:/letsendorse_assn/public/html"
+    baseFrontend = "file:///D:/letsendorse/public/html"
 }
 
 
