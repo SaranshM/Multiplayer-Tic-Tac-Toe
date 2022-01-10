@@ -13,6 +13,7 @@ const post = bodyParser.urlencoded({extended:false,limit:'50mb'});
 const app = express();
 app.use(cors())
 app.use(bodyParser.json({limit:'50mb'}));
+const port = process.env.PORT || 3000
 
 // Setting up socket.io
 const server = http.createServer(app);
@@ -134,6 +135,6 @@ io.on('connection', async (socket)=>{
 })
 
 // Server listening for requests.
-server.listen(process.env.PORT,()=>{
+server.listen(port, ()=>{
     console.log("Listening to port ",process.env.PORT);
 })
