@@ -188,9 +188,6 @@ function remove_option(elem,num) {
 
 // Display move by player1/player2
 socket.on("display_move", async (user_datax) => {
-    if(user_datax.game_status == "over") {
-        localStorage[`${user_data.game_id}_status`] = "over"
-    }
     localStorage[`${user_data.game_id}_boxes_filled`]++
     if(num_users == 2 && localStorage[`${user_data.game_id}_status`] == "ongoing") {
         if(user_datax.action == "cross") {
@@ -207,6 +204,9 @@ socket.on("display_move", async (user_datax) => {
             document.getElementsByClassName("col")[user_datax.num-1].style.backgroundRepeat = "no-repeat"
             document.getElementsByClassName("col")[user_datax.num-1].style.backgroundPosition = "center"
         }
+    }
+    if(user_datax.game_status == "over") {
+        localStorage[`${user_data.game_id}_status`] = "over"
     }
     if(user_datax.user == localStorage[`${user_data.game_id}_turn`]) {
         localStorage[`${user_data.game_id}_turn`] = "no"
