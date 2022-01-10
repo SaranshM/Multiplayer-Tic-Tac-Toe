@@ -136,5 +136,5 @@ io.on('connection', async (socket)=>{
 
 // Server listening for requests.
 server.listen(port, ()=>{
-    console.log("Listening to port ",process.env.PORT);
+    console.log("Listening to port ",port);
 })
