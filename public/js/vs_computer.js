@@ -6,7 +6,8 @@ const currUrl = window.location.href;
 let baseBackend, baseFrontend;
 if (currUrl.slice(0, 5) == "https") {
   baseBackend = "https://multiplayer-tac-tac-toe.onrender.com";
-  baseFrontend = "https://saranshm.github.io/letsendorse_assn/public/html";
+  baseFrontend =
+    "https://saranshm.github.io/Multiplayer-Tic-Tac-Toe/public/html";
 } else {
   baseBackend = "http://localhost:3000";
   baseFrontend = "file:///D:/letsendorse/public/html";
