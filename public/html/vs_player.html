@@ -1,93 +1,136 @@
 <html>
-    <head>
-        <title>Tic-Tac-Toe</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <a href="./index.html" style = "text-decoration: none;">
-            <div class="header">
-                <img src="../images/header_icon.png">
-                <h1>Tic-Tac-Toe</h1>
-            </div>
-        </a>
-        <div class="players">
-            <table class="player">
-                <tr class="score_elem_wrap">
-                    <td class="player_type">Host :</td>
-                    <td id="player1_name">-</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_wins">Wins :</td>
-                    <td id="player1_wins">-</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_lost">Lost :</td>
-                    <td id="player1_losses">-</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_draws">Draws :</td>
-                    <td id="player1_draws">-</td>
-                </tr>
-            </table>
-            <table class="player">
-                <tr class="score_elem_wrap">
-                    <td class="player_type">Joined :</td>
-                    <td id="player2_name">Yet to join</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_wins">Wins :</td>
-                    <td id="player2_wins">-</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_lost">Lost :</td>
-                    <td id="player2_losses">-</td>
-                </tr>
-                <tr class="score_elem_wrap">
-                    <td class="player_draws">Draws :</td>
-                    <td id="player2_draws">-</td>
-                </tr>
-            </table>
-        </div>
+  <head>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="./index.html" style="text-decoration: none">
+      <div class="header">
+        <img src="../images/header_icon.png" />
+        <h1>Tic-Tac-Toe</h1>
+      </div>
+    </a>
+    <div class="players">
+      <table class="player">
+        <tr class="score_elem_wrap">
+          <td class="player_type">Host :</td>
+          <td id="player1_name">-</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_wins">Wins :</td>
+          <td id="player1_wins">-</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_lost">Lost :</td>
+          <td id="player1_losses">-</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_draws">Draws :</td>
+          <td id="player1_draws">-</td>
+        </tr>
+      </table>
+      <table class="player">
+        <tr class="score_elem_wrap">
+          <td class="player_type">Joined :</td>
+          <td id="player2_name">Yet to join</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_wins">Wins :</td>
+          <td id="player2_wins">-</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_lost">Lost :</td>
+          <td id="player2_losses">-</td>
+        </tr>
+        <tr class="score_elem_wrap">
+          <td class="player_draws">Draws :</td>
+          <td id="player2_draws">-</td>
+        </tr>
+      </table>
+    </div>
 
-        <div class="board">
-            <div class="row">
-                <div class="col" onmouseover="show_option(this,1)" onmouseout="remove_option(this,1)" onclick="execute_option(this,1)">
-                </div>
-                <div class="col" onmouseover="show_option(this,2)" onmouseout="remove_option(this,2)" onclick="execute_option(this,2)">
-                </div>
-                <div class="col" onmouseover="show_option(this,3)" onmouseout="remove_option(this,3)" onclick="execute_option(this,3)">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" onmouseover="show_option(this,4)" onmouseout="remove_option(this,4)" onclick="execute_option(this,4)">
-                </div>
-                <div class="col" onmouseover="show_option(this,5)" onmouseout="remove_option(this,5)" onclick="execute_option(this,5)">
-                </div>
-                <div class="col" onmouseover="show_option(this,6)" onmouseout="remove_option(this,6)" onclick="execute_option(this,6)">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" onmouseover="show_option(this,7)" onmouseout="remove_option(this,7)" onclick="execute_option(this,7)">
-                </div>
-                <div class="col" onmouseover="show_option(this,8)" onmouseout="remove_option(this,8)" onclick="execute_option(this,8)">
-                </div>
-                <div class="col" onmouseover="show_option(this,9)" onmouseout="remove_option(this,9)" onclick="execute_option(this,9)">
-                </div>
-            </div>
-        </div>
-        <div class="error_wrap">
-            <div class="error">
-                <img src="https://img.icons8.com/ios-glyphs/30/000000/macos-close.png" class="close" onclick="close_notification_player(this)"/>
-                <p class="error_text"></p>
-                <button class="submit" onclick = "restart_game()">Restart</button>
-            </div>
-        </div>
-    </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
-    <script src="https://letsendorse-assn.herokuapp.com/socket.io/socket.io.js"></script>
+    <div class="board">
+      <div class="row">
+        <div
+          class="col"
+          onmouseover="show_option(this,1)"
+          onmouseout="remove_option(this,1)"
+          onclick="execute_option(this,1)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,2)"
+          onmouseout="remove_option(this,2)"
+          onclick="execute_option(this,2)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,3)"
+          onmouseout="remove_option(this,3)"
+          onclick="execute_option(this,3)"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          class="col"
+          onmouseover="show_option(this,4)"
+          onmouseout="remove_option(this,4)"
+          onclick="execute_option(this,4)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,5)"
+          onmouseout="remove_option(this,5)"
+          onclick="execute_option(this,5)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,6)"
+          onmouseout="remove_option(this,6)"
+          onclick="execute_option(this,6)"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          class="col"
+          onmouseover="show_option(this,7)"
+          onmouseout="remove_option(this,7)"
+          onclick="execute_option(this,7)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,8)"
+          onmouseout="remove_option(this,8)"
+          onclick="execute_option(this,8)"
+        ></div>
+        <div
+          class="col"
+          onmouseover="show_option(this,9)"
+          onmouseout="remove_option(this,9)"
+          onclick="execute_option(this,9)"
+        ></div>
+      </div>
+    </div>
+    <div class="error_wrap">
+      <div class="error">
+        <img
+          src="https://img.icons8.com/ios-glyphs/30/000000/macos-close.png"
+          class="close"
+          onclick="close_notification_player(this)"
+        />
+        <p class="error_text"></p>
+        <button class="submit" onclick="restart_game()">Restart</button>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+  <script src="https://multiplayer-tac-tac-toe.onrender.com/socket.io/socket.io.js"></script>
 </html>
 <script src="../js/vs_player.js"></script>
